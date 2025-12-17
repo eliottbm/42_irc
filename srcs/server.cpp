@@ -332,9 +332,9 @@ void    Server::_handle_message(User &user, Message &parsed)
                 key = params[1];
             }
             if (chan.join(&user, key))
-                std::cout << user._get_username() << " successfully joined " << chan._getName() << std::endl;
+                std::cout << user._get_nickname() << " successfully joined " << chan._getName() << std::endl;
             else
-                std::cout << user._get_username() << " didnt joined " << chan._getName() << std::endl;
+                std::cout << user._get_nickname() << " didnt joined " << chan._getName() << std::endl;
         }catch (ErrNoSuchChannel &e)
         {
             Channel chan(chan_name);
@@ -354,7 +354,7 @@ void    Server::_handle_message(User &user, Message &parsed)
             User & tokick = getUserByUname_ref(params[1], _users );
             if (chan.kick(&tokick, &user, parsed._get_trailing()))
             {
-            std::cout << user._get_username() << "successfully kicked " << tokick._get_username() << "out of " << chan._getName() << std::endl;
+            std::cout << user._get_nickname() << " successfully kicked " << tokick._get_nickname() << " out of " << chan._getName() << std::endl;
             }
             return ;
         }
@@ -418,7 +418,7 @@ void    Server::_handle_message(User &user, Message &parsed)
             {
                 if (chan.setTopic(parsed._get_trailing(), user))
                 {
-                    std::cout << user._get_username() << "successfully changed topic " << std::endl;
+                    std::cout << user._get_nickname() << " successfully changed topic " << std::endl;
                 }
             }
         }catch(ChannelException &e)
